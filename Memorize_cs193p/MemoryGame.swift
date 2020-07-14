@@ -12,8 +12,8 @@ import Foundation
 
 struct MemoryGame<CardContent> where CardContent: Equatable{
     
-    var cards : Array <Card>
-    var indexOfTheOneAndOnlyFaceUpCard : Int? {
+    private(set) var cards : Array <Card>
+    private var indexOfTheOneAndOnlyFaceUpCard : Int? {
         get{ cards.indices.filter{ cards[$0].isFaceUp }.only }
 
         set{
@@ -49,8 +49,8 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
             let content = cardContentFactory(pairIndex)
             cards.append(Card(content: content, id : 2*pairIndex))
             cards.append(Card(content: content, id : 2*pairIndex+1))
-
         }
+        cards.shuffle()
     }
 
     struct Card: Identifiable{
